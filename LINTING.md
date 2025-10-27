@@ -5,15 +5,19 @@
 ## 📁 Структура
 
 ```
-oop/
+mai_oop_3/
 ├── .clang-format          # Конфигурация форматирования
 ├── .clang-tidy           # Конфигурация проверки стиля
+├── .cursorignore         # Исключения для IDE
+├── .gitignore            # Исключения для Git
 ├── lint_all.bat          # Скрипт проверки (Windows)
 ├── codestyle.md          # Правила кодстайла
-└── lab_2/                # Лабораторные работы
-    ├── include/
-    ├── src/
-    └── tests/
+├── LINTING.md            # Документация по линтингу
+└── lab_3/                # Лабораторная работа №3
+    ├── CMakeLists.txt    # Конфигурация CMake
+    ├── include/          # Заголовочные файлы (.h, .hpp)
+    ├── src/              # Исходные файлы (.cpp)
+    └── tests/            # Google Test тесты
 ```
 
 ## 🚀 Использование
@@ -35,13 +39,13 @@ lint_all.bat
 **Windows** (используйте команды напрямую или `lint_all.bat`):
 ```powershell
 # Проверка форматирования
-clang-format --dry-run --Werror lab_2/src/*.cpp lab_2/include/*.hpp
+clang-format --dry-run --Werror lab_3/src/*.cpp lab_3/include/*.hpp
 
 # Автоматическое форматирование
-clang-format -i lab_2/src/*.cpp lab_2/include/*.hpp
+clang-format -i lab_3/src/*.cpp lab_3/include/*.hpp
 
 # Проверка стиля кода
-clang-tidy lab_2/src/*.cpp lab_2/include/*.hpp -- -std=c++17 -Ilab_2/include
+clang-tidy lab_3/src/*.cpp lab_3/include/*.hpp -- -std=c++17 -Ilab_3/include
 ```
 
 **Linux/Mac** (с Makefile):
@@ -60,17 +64,17 @@ make check-all     # выполнить все проверки
 ### Проверка конкретной лабы
 
 ```bash
-# Проверка lab_2 (универсально для любой lab_X)
-LAB_NAME="lab_2"
+# Проверка lab_3 (универсально для любой lab_X)
+LAB_NAME="lab_3"
 clang-format --dry-run --Werror $LAB_NAME/src/*.cpp $LAB_NAME/include/*.hpp
 clang-tidy $LAB_NAME/src/*.cpp $LAB_NAME/include/*.hpp -- -std=c++17 -I$LAB_NAME/include
 ```
 
 Или без переменной:
 ```bash
-# Для lab_2
-clang-format --dry-run --Werror lab_2/src/*.cpp lab_2/include/*.hpp
-clang-tidy lab_2/src/*.cpp lab_2/include/*.hpp -- -std=c++17 -Ilab_2/include
+# Для lab_3
+clang-format --dry-run --Werror lab_3/src/*.cpp lab_3/include/*.hpp
+clang-tidy lab_3/src/*.cpp lab_3/include/*.hpp -- -std=c++17 -Ilab_3/include
 ```
 
 ## ⚙️ Настройки
@@ -84,8 +88,12 @@ clang-tidy lab_2/src/*.cpp lab_2/include/*.hpp -- -std=c++17 -Ilab_2/include
 ### Проверка стиля (.clang-tidy)
 - Проверка именования: CamelCase для классов, camelBack для функций
 - Проверка const-correctness
-- Проверка использования современных C++ возможностей
-- Проверка безопасности памяти
+- Проверка использования современных C++ возможностей (modernize-*)
+- Проверка безопасности памяти и багов (bugprone-*, cert-*)
+- Проверка производительности (performance-*)
+- Статический анализ кода (clang-analyzer-*)
+- Проверка читаемости (readability-*)
+- Рекомендации C++ Core Guidelines (cppcoreguidelines-*)
 
 ## 🔧 Установка инструментов
 
@@ -108,17 +116,17 @@ brew install clang-format clang-tidy
 
 ### Форматирование файла:
 ```bash
-clang-format -i lab_2/src/binary.cpp
+clang-format -i lab_3/src/figure.cpp
 ```
 
 ### Проверка конкретного файла:
 ```bash
-clang-tidy lab_2/src/binary.cpp -- -std=c++17 -Ilab_2/include
+clang-tidy lab_3/src/figure.cpp -- -std=c++17 -Ilab_3/include
 ```
 
 ### Автоматическое исправление:
 ```bash
-clang-tidy -fix lab_2/src/binary.cpp -- -std=c++17 -Ilab_2/include
+clang-tidy -fix lab_3/src/figure.cpp -- -std=c++17 -Ilab_3/include
 ```
 
 ## 🎯 Рекомендации

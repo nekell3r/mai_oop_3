@@ -1,6 +1,22 @@
 ---
 Checks: >
-  *,
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -readability-braces-around-statements,
+  -readability-magic-numbers,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length,
   -abseil-*,
   -altera-*,
   -android-*,
@@ -9,19 +25,9 @@ Checks: >
   -llvm-*,
   -llvmlibc-*,
   -zircon-*,
-  -readability-*,
-  -modernize-*,
-  -performance-*,
-  -portability-*,
-  -cppcoreguidelines-*,
-  -clang-analyzer-*,
-  -concurrency-*,
-  -bugprone-*,
-  -misc-*,
-  -cert-*,
   -hicpp-*
 WarningsAsErrors: ''
-HeaderFilterRegex: '.*'
+HeaderFilterRegex: '(include|src|tests)/.*\.(h|hpp)$'
 FormatStyle: 'file'
 CheckOptions:
   - key: readability-identifier-naming.ClassCase
