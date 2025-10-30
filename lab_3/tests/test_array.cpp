@@ -18,8 +18,8 @@ TEST(ArrayTest, AddAndGet) {
   arr.add(std::make_unique<Hexagon>());
   
   EXPECT_EQ(arr.size(), 2);
-  EXPECT_NE(arr.get(0), nullptr);
-  EXPECT_NE(arr.get(1), nullptr);
+  EXPECT_NE(arr[0], nullptr);
+  EXPECT_NE(arr[1], nullptr);
 }
 
 TEST(ArrayTest, AddNullFigureThrows) {
