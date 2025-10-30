@@ -4,7 +4,8 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-using namespace geometry;
+using geometry::Hexagon;
+using geometry::Point;
 
 TEST(HexagonTest, DefaultConstructor) {
   Hexagon h;

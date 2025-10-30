@@ -6,9 +6,12 @@
 #include <iostream>
 #include <sstream>
 
-using namespace geometry;
-
 namespace {
+
+using geometry::Array;
+using geometry::Triangle;
+using geometry::Hexagon;
+using geometry::Octagon;
 
 void printMenu() {
   std::cout << "\n=== Меню ===" << std::endl;

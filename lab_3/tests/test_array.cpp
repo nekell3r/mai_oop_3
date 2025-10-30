@@ -6,7 +6,11 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-using namespace geometry;
+using geometry::Array;
+using geometry::Triangle;
+using geometry::Hexagon;
+using geometry::Octagon;
+using geometry::Point;
 
 TEST(ArrayTest, AddAndGet) {
   Array arr;

@@ -4,7 +4,8 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-using namespace geometry;
+using geometry::Triangle;
+using geometry::Point;
 
 TEST(TriangleTest, DefaultConstructor) {
   Triangle t;

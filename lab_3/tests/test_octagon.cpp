@@ -4,7 +4,8 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-using namespace geometry;
+using geometry::Octagon;
+using geometry::Point;
 
 TEST(OctagonTest, DefaultConstructor) {
   Octagon o;
