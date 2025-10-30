@@ -5,8 +5,6 @@
 
 namespace geometry {
 
-constexpr double EPS = 1e-9;
-
 struct Point {
   double x, y;
 
@@ -14,8 +12,14 @@ struct Point {
   Point(double xVal, double yVal) : x(xVal), y(yVal) {}
 
   bool operator==(const Point& other) const {
-    return (std::abs(x - other.x) < EPS) && (std::abs(y - other.y) < EPS);
+    static constexpr double EPS = 1e-9;
+    double dx = x - other.x;
+    double dy = y - other.y;
+    return (dx * dx + dy * dy) < EPS * EPS;
   }
+
+  friend std::ostream& operator<<(std::ostream& os, const Point& p);
+  friend std::istream& operator>>(std::istream& is, Point& p);
 };
 
 class Figure {
@@ -46,6 +50,16 @@ inline std::ostream& operator<<(std::ostream& os, const Figure& figure) {
 
 inline std::istream& operator>>(std::istream& is, Figure& figure) {
   figure.read(is);
+  return is;
+}
+
+inline std::ostream& operator<<(std::ostream& os, const Point& p) {
+  os << p.x << " " << p.y;
+  return os;
+}
+
+inline std::istream& operator>>(std::istream& is, Point& p) {
+  is >> p.x >> p.y;
   return is;
 }
 

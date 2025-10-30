@@ -66,7 +66,7 @@ void Octagon::print(std::ostream& os) const {
 
 void Octagon::read(std::istream& is) {
   for (size_t i = 0; i < vertices_.size(); i++) {
-    is >> vertices_[i].x >> vertices_[i].y;
+    is >> vertices_[i];
   }
 }
 

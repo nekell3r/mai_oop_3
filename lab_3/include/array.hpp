@@ -4,23 +4,26 @@
 
 #include <memory>
 #include <stdexcept>
-#include <vector>
 
 namespace geometry {
 
 class Array {
  private:
-  std::vector<std::unique_ptr<Figure>> figures_;
+  Figure** data_;
+  size_t size_;
+  size_t capacity_;
+
+  void resize();
 
  public:
-  Array() = default;
-  ~Array() = default;
+  Array();
+  ~Array();
 
   Array(const Array&) = delete;
   Array& operator=(const Array&) = delete;
 
-  Array(Array&& other) noexcept = default;
-  Array& operator=(Array&& other) noexcept = default;
+  Array(Array&& other) noexcept;
+  Array& operator=(Array&& other) noexcept;
 
   void add(std::unique_ptr<Figure> figure);
 
@@ -29,7 +32,7 @@ class Array {
   Figure* operator[](size_t index) const;
 
   size_t size() const {
-    return figures_.size();
+    return size_;
   }
 
   double getTotalArea() const;

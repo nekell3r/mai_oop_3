@@ -34,9 +34,7 @@ void Triangle::print(std::ostream& os) const {
 }
 
 void Triangle::read(std::istream& is) {
-  is >> vertices_[0].x >> vertices_[0].y;
-  is >> vertices_[1].x >> vertices_[1].y;
-  is >> vertices_[2].x >> vertices_[2].y;
+  is >> vertices_[0] >> vertices_[1] >> vertices_[2];
 }
 
 std::unique_ptr<Figure> Triangle::clone() const {

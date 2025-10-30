@@ -64,7 +64,7 @@ void Hexagon::print(std::ostream& os) const {
 
 void Hexagon::read(std::istream& is) {
   for (int i = 0; i < 6; i++) {
-    is >> vertices_[i].x >> vertices_[i].y;
+    is >> vertices_[i];
   }
 }
 
