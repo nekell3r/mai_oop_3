@@ -8,41 +8,15 @@ Triangle::Triangle() : vertices_{Point(0, 0), Point(1, 0), Point(0.5, std::sqrt(
 
 Triangle::Triangle(const Point& p1, const Point& p2, const Point& p3) : vertices_{p1, p2, p3} {}
 
-Triangle::Triangle(const Triangle& other) : vertices_(other.vertices_) {}
-
-Triangle::Triangle(Triangle&& other) noexcept : vertices_(std::move(other.vertices_)) {}
-
-Triangle& Triangle::operator=(const Triangle& other) {
-  if (this != &other) {
-    vertices_ = other.vertices_;
-  }
-  return *this;
-}
-
-Triangle& Triangle::operator=(Triangle&& other) noexcept {
-  if (this != &other) {
-    vertices_ = std::move(other.vertices_);
-  }
-  return *this;
-}
-
 bool Triangle::operator==(const Triangle& other) const {
-  for (size_t i = 0; i < VERTICES; ++i) {
-    if (!(vertices_[i] == other.vertices_[i])) {
-      return false;
-    }
-  }
-  return true;
+  return (vertices_[0] == other.vertices_[0]) &&
+         (vertices_[1] == other.vertices_[1]) &&
+         (vertices_[2] == other.vertices_[2]);
 }
 
 Point Triangle::getCenter() const {
-  double centerX = 0.0;
-  double centerY = 0.0;
-  for (size_t i = 0; i < VERTICES; ++i) {
-    centerX += vertices_[i].x;
-    centerY += vertices_[i].y;
-  }
-  return Point(centerX / VERTICES, centerY / VERTICES);
+  return Point((vertices_[0].x + vertices_[1].x + vertices_[2].x) / 3.0,
+               (vertices_[0].y + vertices_[1].y + vertices_[2].y) / 3.0);
 }
 
 double Triangle::getArea() const {
@@ -54,19 +28,15 @@ double Triangle::getArea() const {
 }
 
 void Triangle::print(std::ostream& os) const {
-  os << "Triangle vertices: ";
-  for (size_t i = 0; i < VERTICES; ++i) {
-    os << "(" << vertices_[i].x << ", " << vertices_[i].y << ")";
-    if (i < VERTICES - 1) {
-      os << ", ";
-    }
-  }
+  os << "Triangle vertices: (" << vertices_[0].x << ", " << vertices_[0].y << "), "
+     << "(" << vertices_[1].x << ", " << vertices_[1].y << "), "
+     << "(" << vertices_[2].x << ", " << vertices_[2].y << ")";
 }
 
 void Triangle::read(std::istream& is) {
-  for (size_t i = 0; i < VERTICES; ++i) {
-    is >> vertices_[i].x >> vertices_[i].y;
-  }
+  is >> vertices_[0].x >> vertices_[0].y;
+  is >> vertices_[1].x >> vertices_[1].y;
+  is >> vertices_[2].x >> vertices_[2].y;
 }
 
 std::unique_ptr<Figure> Triangle::clone() const {
@@ -81,4 +51,4 @@ bool Triangle::isEqual(const Figure& other) const {
   return *this == *otherTriangle;
 }
 
-}  // namespace geometry
+}

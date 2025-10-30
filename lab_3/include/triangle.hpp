@@ -15,11 +15,11 @@ class Triangle : public Figure {
  public:
   Triangle();
   Triangle(const Point& p1, const Point& p2, const Point& p3);
-  Triangle(const Triangle& other);
-  Triangle(Triangle&& other) noexcept;
+  Triangle(const Triangle& other) = default;
+  Triangle(Triangle&& other) noexcept = default;
 
-  Triangle& operator=(const Triangle& other);
-  Triangle& operator=(Triangle&& other) noexcept;
+  Triangle& operator=(const Triangle& other) = default;
+  Triangle& operator=(Triangle&& other) noexcept = default;
   bool operator==(const Triangle& other) const;
 
   Point getCenter() const override;
@@ -34,4 +34,4 @@ class Triangle : public Figure {
   }
 };
 
-}  // namespace geometry
+}

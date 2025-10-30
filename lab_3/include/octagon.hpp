@@ -16,11 +16,7 @@ class Octagon : public Figure {
   Octagon();
   Octagon(const Point& p1, const Point& p2, const Point& p3, const Point& p4, const Point& p5,
           const Point& p6, const Point& p7, const Point& p8);
-  Octagon(const Octagon& other);
-  Octagon(Octagon&& other) noexcept;
 
-  Octagon& operator=(const Octagon& other);
-  Octagon& operator=(Octagon&& other) noexcept;
   bool operator==(const Octagon& other) const;
 
   Point getCenter() const override;
@@ -35,4 +31,4 @@ class Octagon : public Figure {
   }
 };
 
-}  // namespace geometry
+}

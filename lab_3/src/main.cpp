@@ -26,7 +26,7 @@ void addTriangle(Array& arr) {
   std::cout << "Введите координаты 3 вершин треугольника (x1 y1 x2 y2 x3 y3): " << std::endl;
   auto triangle = std::make_unique<Triangle>();
   std::cin >> *triangle;
-  if (std::cin.fail()) {
+  if (!std::cin) {
     std::cin.clear();
     std::cin.ignore(10000, '\n');
     std::cout << "Ошибка ввода!" << std::endl;
@@ -38,7 +38,7 @@ void addTriangle(Array& arr) {
 
 void addHexagon(Array& arr) {
   std::cout << "Введите координаты 6 вершин шестиугольника (x1 y1 x2 y2 ... x6 y6): " << std::endl;
-  auto hexagon = std::make_unique<Hexagon>();
+  std::unique_ptr<Hexagon> hexagon = std::make_unique<Hexagon>();
   std::cin >> *hexagon;
   if (std::cin.fail()) {
     std::cin.clear();
@@ -65,7 +65,7 @@ void addOctagon(Array& arr) {
 }
 
 void showAllFigures(const Array& arr) {
-  if (arr.size() == 0) {
+  if (!arr.size()) {
     std::cout << "Массив пуст!" << std::endl;
     return;
   }
@@ -83,23 +83,23 @@ void removeFigure(Array& arr) {
     return;
   }
   std::cout << "Введите индекс фигуры для удаления (0-" << (arr.size() - 1) << "): ";
-  size_t index;
+  int index;
   std::cin >> index;
-  if (std::cin.fail()) {
+  if (std::cin.fail() || index < 0) {
     std::cin.clear();
     std::cin.ignore(10000, '\n');
     std::cout << "Ошибка ввода!" << std::endl;
     return;
   }
   try {
-    arr.remove(index);
+    arr.remove(static_cast<size_t>(index));
     std::cout << "Фигура удалена!" << std::endl;
   } catch (const std::exception& e) {
     std::cout << "Ошибка: " << e.what() << std::endl;
   }
 }
 
-}  // namespace
+}
 
 int main() {
   Array arr;
@@ -107,44 +107,37 @@ int main() {
   std::cout << "=== Лабораторная работа №3: Фигуры вращения ===" << std::endl;
   std::cout << "Вариант 23: Треугольник, Шестиугольник, Восьмиугольник" << std::endl;
 
-  int choice = -1;
-  while (choice != 0) {
+  int choice;
+  while (true) {
     printMenu();
     std::cin >> choice;
 
-    if (std::cin.fail()) {
+    if (!std::cin) {
       std::cin.clear();
       std::cin.ignore(10000, '\n');
       std::cout << "Неверный ввод!" << std::endl;
       continue;
     }
+    
+    if (choice == 0) break;
 
-    switch (choice) {
-    case 1:
+    if (choice == 1) {
       addTriangle(arr);
-      break;
-    case 2:
+    } else if (choice == 2) {
       addHexagon(arr);
-      break;
-    case 3:
+    } else if (choice == 3) {
       addOctagon(arr);
-      break;
-    case 4:
+    } else if (choice == 4) {
       showAllFigures(arr);
-      break;
-    case 5:
+    } else if (choice == 5) {
       showTotalArea(arr);
-      break;
-    case 6:
+    } else if (choice == 6) {
       removeFigure(arr);
-      break;
-    case 0:
-      std::cout << "До свидания!" << std::endl;
-      break;
-    default:
+    } else {
       std::cout << "Неверный выбор!" << std::endl;
     }
   }
-
+  
+  std::cout << "До свидания!" << std::endl;
   return 0;
 }

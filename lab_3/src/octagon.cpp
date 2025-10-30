@@ -9,40 +9,20 @@ namespace {
 constexpr double PI = 3.14159265358979323846;
 
 std::array<Point, 8> createRegularOctagon() {
-  const double RADIUS = 1.0;
   std::array<Point, 8> vertices;
-  for (size_t i = 0; i < 8; ++i) {
-    double angle = PI / 4.0 * i;
-    vertices[i].x = RADIUS * std::cos(angle);
-    vertices[i].y = RADIUS * std::sin(angle);
+  for (size_t i = 0; i < 8; i++) {
+    double angle = (PI / 4.0) * i;
+    vertices[i] = Point(std::cos(angle), std::sin(angle));
   }
   return vertices;
 }
-}  // namespace
+}
 
 Octagon::Octagon() : vertices_(createRegularOctagon()) {}
 
 Octagon::Octagon(const Point& p1, const Point& p2, const Point& p3, const Point& p4,
                  const Point& p5, const Point& p6, const Point& p7, const Point& p8)
     : vertices_{p1, p2, p3, p4, p5, p6, p7, p8} {}
-
-Octagon::Octagon(const Octagon& other) : vertices_(other.vertices_) {}
-
-Octagon::Octagon(Octagon&& other) noexcept : vertices_(std::move(other.vertices_)) {}
-
-Octagon& Octagon::operator=(const Octagon& other) {
-  if (this != &other) {
-    vertices_ = other.vertices_;
-  }
-  return *this;
-}
-
-Octagon& Octagon::operator=(Octagon&& other) noexcept {
-  if (this != &other) {
-    vertices_ = std::move(other.vertices_);
-  }
-  return *this;
-}
 
 bool Octagon::operator==(const Octagon& other) const {
   for (size_t i = 0; i < VERTICES; ++i) {
@@ -54,13 +34,14 @@ bool Octagon::operator==(const Octagon& other) const {
 }
 
 Point Octagon::getCenter() const {
-  double centerX = 0.0;
-  double centerY = 0.0;
-  for (const auto& vertex : vertices_) {
-    centerX += vertex.x;
-    centerY += vertex.y;
+  Point center;
+  for (const auto& v : vertices_) {
+    center.x += v.x;
+    center.y += v.y;
   }
-  return Point(centerX / VERTICES, centerY / VERTICES);
+  center.x /= 8;
+  center.y /= 8;
+  return center;
 }
 
 double Octagon::getArea() const {
@@ -75,17 +56,17 @@ double Octagon::getArea() const {
 
 void Octagon::print(std::ostream& os) const {
   os << "Octagon vertices: ";
-  for (size_t i = 0; i < VERTICES; ++i) {
-    os << "(" << vertices_[i].x << ", " << vertices_[i].y << ")";
-    if (i < VERTICES - 1) {
-      os << ", ";
-    }
+  bool first = true;
+  for (const auto& v : vertices_) {
+    if (!first) os << ", ";
+    os << "(" << v.x << ", " << v.y << ")";
+    first = false;
   }
 }
 
 void Octagon::read(std::istream& is) {
-  for (auto& vertex : vertices_) {
-    is >> vertex.x >> vertex.y;
+  for (size_t i = 0; i < vertices_.size(); i++) {
+    is >> vertices_[i].x >> vertices_[i].y;
   }
 }
 
@@ -101,4 +82,4 @@ bool Octagon::isEqual(const Figure& other) const {
   return *this == *otherOctagon;
 }
 
-}  // namespace geometry
+}
