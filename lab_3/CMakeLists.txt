@@ -14,6 +14,7 @@ endif()
 include_directories(include)
 
 set(LIBRARY_SOURCES
+    src/figure.cpp
     src/triangle.cpp
     src/hexagon.cpp
     src/octagon.cpp

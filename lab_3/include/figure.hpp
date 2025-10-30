@@ -43,24 +43,10 @@ class Figure {
   virtual bool isEqual(const Figure& other) const = 0;
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Figure& figure) {
-  figure.print(os);
-  return os;
-}
+std::ostream& operator<<(std::ostream& os, const Figure& figure);
+std::istream& operator>>(std::istream& is, Figure& figure);
 
-inline std::istream& operator>>(std::istream& is, Figure& figure) {
-  figure.read(is);
-  return is;
-}
-
-inline std::ostream& operator<<(std::ostream& os, const Point& p) {
-  os << p.x << " " << p.y;
-  return os;
-}
-
-inline std::istream& operator>>(std::istream& is, Point& p) {
-  is >> p.x >> p.y;
-  return is;
-}
+std::ostream& operator<<(std::ostream& os, const Point& p);
+std::istream& operator>>(std::istream& is, Point& p);
 
 }
