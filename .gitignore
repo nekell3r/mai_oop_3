@@ -26,6 +26,7 @@ _deps/
 *~
 *.swp
 .bak
+.DS_Store
 
 # Compiled files
 *.exe
